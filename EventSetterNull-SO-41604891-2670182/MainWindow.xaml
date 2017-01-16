@@ -8,7 +8,8 @@
         Title="MainWindow" Height="350" Width="525">
     <Window.Resources>
         <SetterBaseCollection x:Key="ButtonStyleSetters">
-            <EventSetter Event="ButtonBase.Click" Handler="StyleClick" />
+            <Setter Property="FrameworkElement.Height" Value="30"></Setter>
+            <EventSetter  Handler="StyleClick" Event="ButtonBase.Click"/>
         </SetterBaseCollection>
     </Window.Resources>
 

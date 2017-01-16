@@ -22,30 +22,8 @@ namespace EventSetterNull_SO_41604891_2670182
 	public partial class MainWindow : Window
 	{
 		public MainWindow ()
-		//public MyStyleSetters setters { get; set; }
 		{
-			//setters = new MyStyleSetters();
-
 			InitializeComponent();
-
-			//setters.Add(new Setter
-			//{
-			//	Property = FrameworkElement.HeightProperty,
-			//	Value = this.Resources["ButtonHeight"]
-			//});
-
-			//setters.Add(new Setter
-			//{
-			//	Property = FrameworkElement.MarginProperty,
-			//	Value = this.Resources["ButtonMargin"]
-			//});
-
-			//setters.Add(new EventSetter
-			//{
-			//	Event = ButtonBase.ClickEvent,
-			//	Handler = (RoutedEventHandler)StyleClick
-			//});
-
 		}
 
 		private void StyleClick (object sender, RoutedEventArgs e)
