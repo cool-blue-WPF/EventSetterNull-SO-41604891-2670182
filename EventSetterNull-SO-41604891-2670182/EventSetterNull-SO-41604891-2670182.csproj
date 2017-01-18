@@ -57,6 +57,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="BuildInXaml.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="BuildInCLR.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ButtonSetters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DecompiledFromCLR.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -66,6 +82,19 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Behaviours.cs" />
+    <Compile Include="BuildInXaml.xaml.cs">
+      <DependentUpon>BuildInXaml.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BuildInCLR.xaml.cs">
+      <DependentUpon>BuildInCLR.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ButtonSetters.xaml.cs">
+      <DependentUpon>ButtonSetters.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DecompiledFromCLR.xaml.cs">
+      <DependentUpon>DecompiledFromCLR.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -89,7 +118,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

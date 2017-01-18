@@ -7,12 +7,16 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Window.Resources>
-        <SetterBaseCollection x:Key="ButtonStyleSetters">
+        <Style TargetType="Button">
             <Setter Property="FrameworkElement.Height" Value="30"></Setter>
-            <EventSetter  Handler="StyleClick" Event="ButtonBase.Click"/>
-        </SetterBaseCollection>
+        </Style>
     </Window.Resources>
-
-    <Button Name="Button1"
-            local:Behaviours.StyleSetters="{StaticResource ButtonStyleSetters}" />
+    <StackPanel>
+        <StackPanel Button.Click="Panel_OnClick">
+            <Button Name="BuildInCLR">Build in CLR</Button>
+            <Button Name="BuildInXaml">Build in xaml</Button>
+            <Button Name="DecompiledFromCLR">Decompiled</Button>
+        </StackPanel>
+        <Button Click="DecompileDictionary">Decompile Dictionary</Button>
+    </StackPanel>
 </Window>

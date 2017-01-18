@@ -1,0 +1,11 @@
+﻿<ResourceDictionary x:Class="EventSetterNull_SO_41604891_2670182.ButtonSetters"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:local="clr-namespace:EventSetterNull_SO_41604891_2670182" >
+    <SetterBaseCollection x:Key="ButtonStyleSetters">
+        <Setter Property="FrameworkElement.Height" Value="30"></Setter>
+        <EventSetter Event="ButtonBase.Click"  
+                     Handler="StyleClick"
+                     HandledEventsToo="False" />
+    </SetterBaseCollection>
+</ResourceDictionary>

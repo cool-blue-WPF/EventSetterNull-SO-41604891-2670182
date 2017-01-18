@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows;
 
 namespace EventSetterNull_SO_41604891_2670182
@@ -52,7 +53,6 @@ namespace EventSetterNull_SO_41604891_2670182
 			return (SetterBaseCollection)element
 				.GetValue(StyleSettersProperty);
 		}
-
 
 		#endregion
 	}
