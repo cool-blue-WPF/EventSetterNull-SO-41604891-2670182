@@ -1,12 +1,17 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Baml2006;
 using System.Windows.Controls;
 using System.Xaml;
 using static System.Diagnostics.Debug;
+using System.Windows.Markup;
 using static System.Xaml.XamlNodeType;
+using XamlReader = System.Xaml.XamlReader;
 
 namespace EventSetterNull_SO_41604891_2670182
 {
@@ -18,15 +23,19 @@ namespace EventSetterNull_SO_41604891_2670182
 		public MainWindow ()
 		{
 			InitializeComponent();
+
+			DecompileDictionary(new object(), new RoutedEventArgs());
 		}
 
 		private void Panel_OnClick (object sender, RoutedEventArgs e)
 		{
-			Button btn = e.OriginalSource as Button;
+			var btn = e.OriginalSource as Button;
 			var win = (Window)System.Windows.Application.LoadComponent(
 				new Uri(btn.Name.Replace("_", "/") + ".xaml", UriKind.Relative));
 			win.Show();
 		}
+
+		public XamlLoadLogger Logger { get; set; } = new XamlLoadLogger();
 
 		private void DecompileDictionary(object sender, RoutedEventArgs e)
 		{
@@ -39,44 +48,41 @@ namespace EventSetterNull_SO_41604891_2670182
 			{
 				LocalAssembly = System.Reflection.Assembly.LoadFile(assembly)
 			};
-			Baml2006Reader reader = new Baml2006Reader(source, settings);
+			//Baml2006Reader reader = new Baml2006Reader(source, settings);
 
-			PrintBamlStream(reader, settings);
+			//PrintBamlStream(reader);
 
-			Window win = System.Windows.Markup.XamlReader.Load(reader) as Window;
+			//source.Seek(0, SeekOrigin.Begin);
+			Window win = System.Windows.Markup.XamlReader.Load(new Baml2006Reader(source, settings)) as Window;
+			win.Show();
+			source.Close();
 
 			WriteLine(System.Windows.Markup.XamlWriter.Save(win));
 		}
 
-		private void PrintBamlStream(XamlReader reader, XamlReaderSettings settings)
+		private void PrintBamlStream(System.Xaml.XamlReader reader, int indent = 0)
 		{
-			var indent = 0;
-			Action preIndent, postIndent;
 			Action increaseIndent = () => indent += 1;
 			Action decreaseIndent = () => indent -= 1;
 			while (reader.Read())
 				try
 				{
+					Action postIndent;
+					var preIndent = postIndent = null;
 					var nodeType = reader.NodeType;
 					var info = "";
-					preIndent = postIndent = null;
 					switch (nodeType)
 					{
 						case StartObject:
+							info = reader.Type?.Name;
+							postIndent = increaseIndent;
+							break;
 						case EndObject:
 							info = reader.Type?.Name;
-							switch (nodeType)
-							{
-								case StartObject:
-									postIndent = increaseIndent;
-									break;
-								case EndObject:
-									preIndent = decreaseIndent;
-									break;
-							}
+							preIndent = decreaseIndent;
 							break;
 						case GetObject:
-							info = reader.Member?.Name;
+							info = (reader.SchemaContext?.GetType()).ToString();
 							postIndent = increaseIndent;
 							break;
 						case StartMember:
@@ -108,26 +114,28 @@ namespace EventSetterNull_SO_41604891_2670182
 					WriteLine("Line: {0,4}{1}\t{2}\t{3}",
 						((System.Xaml.IXamlLineInfo)reader).LineNumber,
 						new string('\t', indent), nodeType, info);
-					// todo parse Markup Extensions
-					//var buffer = reader.Value as MemoryStream;
-					//if (nodeType == Value && buffer != null)
-					//{
-					//	PrintBamlStream(new XamlXmlReader(buffer, reader.SchemaContext), 
-					//		settings);
-					//}
 
 					postIndent?.Invoke();
+
+					// todo parse Markup Extensions
+					var buffer = reader.Value as MemoryStream;
+					if (reader.NodeType == GetObject)
+					{
+						var rootIndent = indent;
+						using (XamlReader subReader = reader.ReadSubtree())
+						{
+							subReader.Read();
+							PrintBamlStream(subReader, indent);
+						}
+						indent = rootIndent;
+						
+					}
 
 				}
 				catch (Exception exception)
 				{
 					WriteLine("{0}\t{1}", reader.NodeType, exception);
 				}
-		}
-
-		private void PrintBamlStream2(Baml2006Reader reader, XamlReaderSettings settings)
-		{
-			
 		}
 	}
 }

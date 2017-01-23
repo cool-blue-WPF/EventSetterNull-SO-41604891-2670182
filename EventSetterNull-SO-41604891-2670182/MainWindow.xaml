@@ -17,6 +17,6 @@
             <Button Name="BuildInXaml">Build in xaml</Button>
             <Button Name="DecompiledFromCLR">Decompiled</Button>
         </StackPanel>
-        <Button Click="DecompileDictionary">Decompile Dictionary</Button>
+        <Button Name="Decompile" Click="DecompileDictionary">Decompile Dictionary</Button>
     </StackPanel>
 </Window>
