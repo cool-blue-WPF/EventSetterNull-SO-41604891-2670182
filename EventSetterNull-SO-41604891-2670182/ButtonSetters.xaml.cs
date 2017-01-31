@@ -10,7 +10,7 @@ namespace EventSetterNull_SO_41604891_2670182
 {
 	public partial class ButtonSetters
 	{
-		private void StyleClick (object sender, RoutedEventArgs e)
+		private void StyleClick(object sender, RoutedEventArgs e)
 		{
 			Debug.WriteLine("StyleClick");
 		}

@@ -1,8 +1,12 @@
-﻿<Window x:Class="EventSetterNull_SO_41604891_2670182.BuildInCLR"
+﻿<Window x:Class="SO_41922006_2670182.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:EventSetterNull_SO_41604891_2670182"
+        xmlns:local="clr-namespace:SO_41922006_2670182"
         mc:Ignorable="d"
-        Title="BuildInCLR" Height="300" Width="300" />
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <local:UserControl1 Width="2.5" BorderBrush="#FF143BE8">Content</local:UserControl1>
+    </Grid>
+</Window>

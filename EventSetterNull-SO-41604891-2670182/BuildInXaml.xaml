@@ -8,9 +8,9 @@
         Title="BuildInXaml" Height="350" Width="525">
     <Window.Resources>
         <SetterBaseCollection x:Key="ButtonStyleSetters">
-            <Setter Property="FrameworkElement.Height" Value="30"></Setter>
-            <EventSetter Event="ButtonBase.Click"  Handler="StyleClick"
-                          HandledEventsToo="False" />
+            <Setter Property="FrameworkElement.Height" Value="30" />
+            <EventSetter Event="ButtonBase.Click" Handler="StyleClick"
+                         HandledEventsToo="False" />
         </SetterBaseCollection>
     </Window.Resources>
 

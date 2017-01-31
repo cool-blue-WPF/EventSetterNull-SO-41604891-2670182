@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,23 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace EventSetterNull_SO_41604891_2670182
+namespace SO_41922006_2670182
 {
 	/// <summary>
-	/// Interaction logic for DecompiledFromCLR.xaml
+	/// Interaction logic for MainWindow.xaml
 	/// </summary>
-	public partial class DecompiledFromCLR : Window
+	public partial class MainWindow : Window
 	{
-		public DecompiledFromCLR()
+		public MainWindow ()
 		{
 			InitializeComponent();
-		}
-
-		public void StyleClick(object sender, RoutedEventArgs e)
-		{
-			Debug.WriteLine("StyleClick");
 		}
 	}
 }

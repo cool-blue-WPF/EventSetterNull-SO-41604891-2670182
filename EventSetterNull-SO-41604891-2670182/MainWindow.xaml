@@ -8,11 +8,11 @@
         Title="MainWindow" Height="350" Width="525">
     <Window.Resources>
         <Style TargetType="Button">
-            <Setter Property="FrameworkElement.Height" Value="30"></Setter>
+            <Setter Property="FrameworkElement.Height" Value="30" />
         </Style>
     </Window.Resources>
-    <StackPanel>
-        <StackPanel Button.Click="Panel_OnClick">
+    <StackPanel Name="OuterStackPanel">
+        <StackPanel Name="InnerStackPanel" Button.Click="Panel_OnClick">
             <Button Name="BuildInCLR">Build in CLR</Button>
             <Button Name="BuildInXaml">Build in xaml</Button>
             <Button Name="DecompiledFromCLR">Decompiled</Button>

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,23 +11,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace EventSetterNull_SO_41604891_2670182
+namespace SO_41922006_2670182
 {
 	/// <summary>
-	/// Interaction logic for DecompiledFromCLR.xaml
+	/// Interaction logic for UserControl1.xaml
 	/// </summary>
-	public partial class DecompiledFromCLR : Window
+	public partial class UserControl1 : UserControl
 	{
-		public DecompiledFromCLR()
+		public UserControl1 ()
 		{
 			InitializeComponent();
 		}
-
-		public void StyleClick(object sender, RoutedEventArgs e)
-		{
-			Debug.WriteLine("StyleClick");
-		}
+	}
+	public class ThicknessList : Collection<Thickness>
+	{
 	}
 }

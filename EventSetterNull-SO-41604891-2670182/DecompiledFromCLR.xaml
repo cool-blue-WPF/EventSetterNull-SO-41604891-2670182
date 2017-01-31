@@ -22,8 +22,5 @@
         </SetterBaseCollection>
     </Window.Resources>
     <Button Height="30"
-            local:Behaviours.StyleSetters="{StaticResource ButtonStyleSetters}"/>
+            local:Behaviours.StyleSetters="{StaticResource ButtonStyleSetters}" />
 </Window>
-
-
-

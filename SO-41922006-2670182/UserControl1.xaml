@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="SO_41922006_2670182.UserControl1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SO_41922006_2670182"
+             xmlns:converters="clr-namespace:SO_41922006_2670182.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style x:Key="MyStyle" TargetType="ContentControl">
+
+            <Style.Resources>
+                <!-- must put resource here -->
+
+                <converters:ThicknessConverter x:Key="ThicknessConverter"/>
+
+                <local:ThicknessList x:Key="ThicknessModifier">
+                    <!-- wrapper list instead of x:Array -->
+                    <!--Thickness Coefficient-->
+                    <Thickness>-0.5</Thickness>
+                    <!--Thickness Offset-->
+                    <Thickness>0,2</Thickness>
+                </local:ThicknessList>
+            </Style.Resources>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ContentControl">
+                        <Border Background="Black" Width="16" Height="16">
+                            <Border.Margin>
+                                <Binding Path="Width"
+                                     RelativeSource="{RelativeSource Self}"
+                                     Converter="{StaticResource ThicknessConverter}"
+                                     ConverterParameter="{StaticResource ThicknessModifier}"/>
+                            </Border.Margin>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <ContentControl Style="{StaticResource MyStyle}" />
+    </Grid>
+</UserControl>

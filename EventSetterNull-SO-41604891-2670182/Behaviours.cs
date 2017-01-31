@@ -15,7 +15,7 @@ namespace EventSetterNull_SO_41604891_2670182
 				new PropertyMetadata(default(SetterBaseCollection),
 					ButtonSettersChanged));
 
-		private static void ButtonSettersChanged (DependencyObject d,
+		private static void ButtonSettersChanged(DependencyObject d,
 			DependencyPropertyChangedEventArgs args)
 		{
 			var fe = d as FrameworkElement;
@@ -28,7 +28,7 @@ namespace EventSetterNull_SO_41604891_2670182
 				foreach (var member in newValue)
 				{
 					var setter = member as Setter;
-					if(setter != null)
+					if (setter != null)
 					{
 						fe.SetValue(setter.Property, setter.Value);
 						continue;
@@ -47,10 +47,10 @@ namespace EventSetterNull_SO_41604891_2670182
 			element.SetValue(StyleSettersProperty, value);
 		}
 
-		public static SetterBaseCollection GetStyleSetters (
+		public static SetterBaseCollection GetStyleSetters(
 			DependencyObject element)
 		{
-			return (SetterBaseCollection)element
+			return (SetterBaseCollection) element
 				.GetValue(StyleSettersProperty);
 		}
 
@@ -63,6 +63,5 @@ namespace EventSetterNull_SO_41604891_2670182
 
 	public class TestList : List<string>
 	{
-		
 	}
 }

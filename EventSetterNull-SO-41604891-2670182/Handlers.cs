@@ -12,13 +12,10 @@ namespace EventSetterNull_SO_41604891_2670182
 	{
 		public static RoutedEventHandler StyleClick
 		{
-			get
-			{
-				return styleClick;
-			}
+			get { return styleClick; }
 		}
 
-		private static void styleClick (object sender, RoutedEventArgs e)
+		private static void styleClick(object sender, RoutedEventArgs e)
 		{
 			Debug.WriteLine("StyleClick");
 		}

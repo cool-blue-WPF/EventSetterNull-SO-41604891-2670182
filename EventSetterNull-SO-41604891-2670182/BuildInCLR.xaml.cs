@@ -12,7 +12,7 @@ namespace EventSetterNull_SO_41604891_2670182
 	/// </summary>
 	public partial class BuildInCLR : Window
 	{
-		public BuildInCLR ()
+		public BuildInCLR()
 		{
 			InitializeComponent();
 
@@ -36,7 +36,8 @@ namespace EventSetterNull_SO_41604891_2670182
 
 			Debug.Print(XamlWriter.Save(this));
 		}
-		private void StyleClick (object sender, RoutedEventArgs e)
+
+		private void StyleClick(object sender, RoutedEventArgs e)
 		{
 			Debug.WriteLine("StyleClick");
 		}

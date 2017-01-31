@@ -4,11 +4,11 @@ using System.Windows;
 namespace EventSetterNull_SO_41604891_2670182
 {
 	/// <summary>
-	/// Interaction logic for MainWindow.xaml
+	/// Interaction logic for LocalStyle.xaml
 	/// </summary>
-	public partial class BuildInXaml
+	public partial class LocalStyle : Window
 	{
-		private void StyleClick(object sender, RoutedEventArgs e)
+		private void StyleClick (object sender, RoutedEventArgs e)
 		{
 			Debug.WriteLine("StyleClick");
 		}

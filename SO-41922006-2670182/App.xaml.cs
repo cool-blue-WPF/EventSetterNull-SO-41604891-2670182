@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace EventSetterNull_SO_41604891_2670182
+namespace SO_41922006_2670182
 {
 	/// <summary>
 	/// Interaction logic for App.xaml
