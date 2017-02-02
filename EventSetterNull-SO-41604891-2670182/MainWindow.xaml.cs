@@ -18,8 +18,8 @@ namespace EventSetterNull_SO_41604891_2670182
 		{
 			InitializeComponent();
 
-			//Debug.WriteLine(Logger.LogMemberTry((App)(Application.Current), 
-			//	new[] { "ParkingHwnd", "_appIsShutdown", "Events" }));
+			//Debug.WriteLine(Logger.LogMember(new testLogger(true),
+			//	new[] { "_deferringWriter", "Handled"}, new[] { "Deferred", "Not deferred"}));
 
 			DecompileDictionary(new object(), new RoutedEventArgs());
 		}
@@ -134,6 +134,16 @@ namespace EventSetterNull_SO_41604891_2670182
 				{
 					Debug.WriteLine("{0}\t{1}", reader.NodeType, exception);
 				}
+		}
+	}
+
+	class testLogger
+	{
+		private object _deferringWriter = new {Handled = false};
+
+		public testLogger(bool handled)
+		{
+			_deferringWriter = handled;
 		}
 	}
 }

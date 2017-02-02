@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Data;
+using System.Windows.Documents;
 using System.Xaml;
 using XamlReader = System.Xaml.XamlReader;
 
@@ -34,9 +35,22 @@ namespace EventSetterNull_SO_41604891_2670182
 			get { return new string(' ', _indent * tabStop); }
 		}
 
-		private string Pre(string label)
+		/// <summary>
+		/// if key is null, simply returns label with padding
+		/// if label is a list, tries to use key to get the label
+		/// </summary>
+		/// <param name="label"></param>
+		/// <param name="key"></param>
+		/// <returns></returns>
+		private string Pre(object label, object key = null)
 		{
-			return label == "" ? "" : new string(' ', 12) + tab + Padding + label;
+			var _label = label as string;
+			if (label is string[])
+			{
+				_label = getOption(key, (string[]) label);
+			}
+			return _label == "" ? "" 
+				: new string(' ', 12) + tab + Padding + _label;
 		}
 
 		private string LogReader(System.Xaml.XamlReader reader)
@@ -129,23 +143,68 @@ namespace EventSetterNull_SO_41604891_2670182
 			return res;
 		}
 
+		public string LogMethod(string name, string direction = "in")
+		{
+			var ret = "";
+
+			try
+			{
+				switch (direction.ToUpper())
+				{
+					case "IN":
+						ret = Pre(name) + " Start";
+						_indent++;
+						break;
+					case "OUT":
+						_indent--;
+						ret = Pre(name) + " End";
+						break;
+					default:
+						ret = Pre(name) + " unknown direction";
+						break;
+				}
+
+			}
+			catch (Exception e)
+			{
+				ret = Pre(name) + " " + e;
+			}
+			return ret;
+		}
+
 		public string Log(string caller, object arg, string type = null)
 		{
 			if (arg == null) return caller + ": Log Error: nul arg";
 			if (arg is XamlReader) return LogReader((XamlReader) arg);
-			if (arg is string) return Pre(caller + " ") + (string)(arg);
+			if (arg is string) return Pre(caller + " ") + (string)arg;
 			return Pre(caller + " ") + (logType(arg, type) ?? "null");
-			return Pre(caller + " ") +( _logTypes[type?? "null"](arg) ?? "null");
 		}
 
-		public string LogMember(object host, object member, string label = "")
+		public string LogMember(object host, object member, object label = null)
 		{
-			if (member is string) return Pre(label) + getMember(host, (string) member);
+			object _value;
+			if (host == null || host.GetType().IsValueType || host is string 
+				|| member is string && string.IsNullOrEmpty((string)member))
+				if (label is List<string>)
+					return Pre(label, host);
+				else
+					return Pre(label) + (host?.ToString() ?? "null");
 
+			// ReSharper disable once ConditionIsAlwaysTrueOrFalse
+			if (member is string)
+			{
+				_value = getMember(host, (string) member);
+				return Pre(label, _value) + _value;
+			}
+
+			// ReSharper disable once HeuristicUnreachableCode
 			var members = member as string[];
 			if (members == null)
+				// ReSharper disable once HeuristicUnreachableCode
 				return Pre(label) + "Argument Exception: member must be string or string[]";
-			return Pre(label) + members.Aggregate(host, getMember);
+
+			_value = members.Aggregate(host, getMember);
+			return Pre(label, _value);
 		}
 
 		public string LogMemberTry(object host, string[] options, string label = "")
@@ -169,7 +228,7 @@ namespace EventSetterNull_SO_41604891_2670182
 		private object getMember(object host, string member)
 		{
 			if(host == null) return "null";
-			return getValue2(host, member) ?? host.ToString();
+			return getValue2(host, member) ?? host;
 		}
 
 		private object getValue(object host, string member)
@@ -250,6 +309,15 @@ namespace EventSetterNull_SO_41604891_2670182
 					break;
 			}
 			return retVal;
+		}
+
+		private string getOption(object key, string[] options)
+		{
+			if (key is bool)
+				return (bool)key ? options[0] : options[1];
+			if ( key is int)
+				return options[(int)key];
+			return "";
 		}
 
 		public string LogMemberList<T>(List<T> host, string label = "", int indx = -1)
